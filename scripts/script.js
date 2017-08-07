@@ -29,3 +29,11 @@ function initListeners() {
 		$("#session").text(sessionTime);
 	});
 }
+
+// Convert seconds to min:sec format
+function timeString(seconds) {
+	var date = new Date(null);
+	date.setSeconds(seconds);
+	return date.toISOString().substr(14,5);
+	// return Math.floor(seconds / 60).toString() + ":" + (seconds % 60).toString();
+}
