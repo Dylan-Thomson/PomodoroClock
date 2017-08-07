@@ -5,8 +5,60 @@ $(function() {
 
 var breakTime = Number($("#break").text());
 var sessionTime = Number($("#session").text());
+var onBreak = false;
 
 function initListeners() {
+	var clock = $(".clock").FlipClock(0, {
+		countdown: true,
+		autoStart: false,
+		clockFace: "MinuteCounter",
+		callbacks: {
+			interval: function() {
+				if(clock.getTime() == 0) {
+					setTimeout(function() {
+						if(onBreak) {
+							alert("Back to work");
+							clock.setTime(sessionTime);
+						}
+						else {
+							alert("Time for a break");
+							clock.setTime(breakTime);
+						}
+						onBreak = !onBreak
+						
+						clock.start();
+					}, 1000);
+				}
+			}
+		}
+	});
+
+	$("#start").on("click", function() {
+		clock.setTime(sessionTime);
+		clock.start();
+		$(this).addClass("hidden");
+		$("#continue").removeClass("hidden");
+		$("#reset").removeClass("hidden");
+		$("#stop").removeClass("hidden");
+	});
+
+	$("#continue").on("click", function() {
+		clock.start();
+	});
+
+	$("#stop").on("click", function() {
+		clock.stop();
+	});
+
+	$("#reset").on("click", function() {
+		$(this).addClass("hidden");
+		$("#continue").addClass("hidden");
+		$("#stop").addClass("hidden");
+		$("#start").removeClass("hidden");
+		clock.stop();
+		clock.setTime(sessionTime * 60);
+	});
+
 	$("#breakLength .fa-minus").on("click", function() {
 		if(breakTime > 1) {
 			breakTime -= 1;
