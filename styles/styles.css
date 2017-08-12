@@ -1,6 +1,7 @@
 body {
 	background: #f8f9f9;
 	color: #353344;
+	text-align: center;
 }
 
 h1 {
@@ -14,4 +15,8 @@ button {
 
 #sessionLength, #breakLength {
 	margin-bottom: 2em;
+}
+
+#clock {
+	font-size: 4em;
 }
