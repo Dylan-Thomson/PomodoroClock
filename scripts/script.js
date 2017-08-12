@@ -12,7 +12,7 @@ var timer;
 function initButtonListeners() {
 	$("#start").on("click", function() {
 		$("#continue, #reset, #stop").removeClass("hidden");
-		$("#start, #sessionLength, #breakLength").addClass("hidden");
+		$("#start").addClass("hidden");
 		$("#clock").text(timeString(sessionTime));
 		startTimer(sessionTime);
 	});
@@ -24,7 +24,7 @@ function initButtonListeners() {
 	});
 
 	$("#reset").on("click", function() {
-		$("#start, #sessionLength, #breakLength").removeClass("hidden");
+		$("#start").removeClass("hidden");
 		$("#reset, #continue, #stop").addClass("hidden");
 		$("#clock").text("0:00");
 		window.clearInterval(timer);
