@@ -34,12 +34,8 @@ function initListeners() {
 	// });
 
 	$("#start").on("click", function() {
-		$(this).addClass("hidden");
-		$("#continue").removeClass("hidden");
-		$("#reset").removeClass("hidden");
-		$("#stop").removeClass("hidden");
-		$("#sessionLength").addClass("hidden");
-		$("#breakLength").addClass("hidden");
+		$("#continue, #reset, #stop").removeClass("hidden");
+		$("#start, #sessionLength, #breakLength").addClass("hidden");
 	});
 
 	$("#continue").on("click", function() {
@@ -51,12 +47,8 @@ function initListeners() {
 	});
 
 	$("#reset").on("click", function() {
-		$(this).addClass("hidden");
-		$("#continue").addClass("hidden");
-		$("#stop").addClass("hidden");
-		$("#start").removeClass("hidden");
-		$("#sessionLength").removeClass("hidden");
-		$("#breakLength").removeClass("hidden");
+		$("#start, #sessionLength, #breakLength").removeClass("hidden");
+		$("#reset, #continue, #stop").addClass("hidden");
 	});
 
 	$("#breakLength .fa-minus").on("click", function() {
