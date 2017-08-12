@@ -41,9 +41,10 @@ function initSetTimerListeners() {
 	});	
 
 	$("#breakLength .fa-plus").on("click", function() {
-		breakTime += 1;
-		$("#break").text(breakTime);
-
+		if(breakTime < 60) {
+			breakTime += 1;
+			$("#break").text(breakTime);		
+		}
 	});	
 	$("#sessionLength .fa-minus").on("click", function() {
 		if(sessionTime > 1) {
@@ -52,8 +53,10 @@ function initSetTimerListeners() {
 		}
 	});	
 	$("#sessionLength .fa-plus").on("click", function() {
-		sessionTime += 1;
-		$("#session").text(sessionTime);
+		if(sessionTime < 60) {
+			sessionTime += 1;
+			$("#session").text(sessionTime);
+		}
 	});
 }
 
