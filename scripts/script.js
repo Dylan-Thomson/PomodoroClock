@@ -7,12 +7,14 @@ $(function() {
 var breakTime = Number($("#break").text());
 var sessionTime = Number($("#session").text());
 var onBreak = false;
+var timer;
 
 function initButtonListeners() {
 	$("#start").on("click", function() {
 		$("#continue, #reset, #stop").removeClass("hidden");
 		$("#start, #sessionLength, #breakLength").addClass("hidden");
-		$("#clock").text(timeString(sessionTime * 60));
+		$("#clock").text(timeString(sessionTime));
+		startTimer(sessionTime);
 	});
 
 	$("#continue").on("click", function() {
@@ -25,6 +27,8 @@ function initButtonListeners() {
 		$("#start, #sessionLength, #breakLength").removeClass("hidden");
 		$("#reset, #continue, #stop").addClass("hidden");
 		$("#clock").text("0:00");
+		window.clearInterval(timer);
+		onBreak = false;
 	});
 }
 
@@ -51,6 +55,29 @@ function initSetTimerListeners() {
 		sessionTime += 1;
 		$("#session").text(sessionTime);
 	});
+}
+
+function startTimer() {
+	var time;
+	var alertMSG;
+	if(!onBreak) {
+		time = sessionTime;
+		alertMSG = "Time for a break!";
+	}
+	else {
+		time = breakTime;
+		alertMSG = "Back to work!";
+	}
+	timer = window.setInterval(function() {
+		time -= 1;
+		$("#clock").text(timeString(time));
+		if(time <= 0) {
+			onBreak = !onBreak;
+			window.clearInterval(timer);
+			alert(alertMSG);
+			return startTimer();
+		}
+	}, 1000);
 }
 
 // Convert seconds to min:sec format
