@@ -8,42 +8,15 @@ var sessionTime = Number($("#session").text());
 var onBreak = false;
 
 function initListeners() {
-	// var clock = $(".clock").FlipClock(0, {
-	// 	countdown: true,
-	// 	autoStart: false,
-	// 	clockFace: "MinuteCounter",
-	// 	callbacks: {
-	// 		interval: function() {
-	// 			if(clock.getTime() == 0) {
-	// 				setTimeout(function() {
-	// 					if(onBreak) {
-	// 						alert("Back to work");
-	// 						clock.setTime(sessionTime);
-	// 					}
-	// 					else {
-	// 						alert("Time for a break");
-	// 						clock.setTime(breakTime);
-	// 					}
-	// 					onBreak = !onBreak
-						
-	// 					clock.start();
-	// 				}, 1000);
-	// 			}
-	// 		}
-	// 	}
-	// });
-
 	$("#start").on("click", function() {
 		$("#continue, #reset, #stop").removeClass("hidden");
 		$("#start, #sessionLength, #breakLength").addClass("hidden");
 	});
 
 	$("#continue").on("click", function() {
-
 	});
 
 	$("#stop").on("click", function() {
-
 	});
 
 	$("#reset").on("click", function() {
@@ -57,6 +30,7 @@ function initListeners() {
 			$("#break").text(breakTime);
 		}
 	});	
+	
 	$("#breakLength .fa-plus").on("click", function() {
 		breakTime += 1;
 		$("#break").text(breakTime);
@@ -71,7 +45,6 @@ function initListeners() {
 	$("#sessionLength .fa-plus").on("click", function() {
 		sessionTime += 1;
 		$("#session").text(sessionTime);
-
 	});
 }
 
