@@ -1,16 +1,18 @@
 // Document Ready
 $(function() {
-	initListeners();
+	initSetTimerListeners();
+	initButtonListeners();
 });
 
 var breakTime = Number($("#break").text());
 var sessionTime = Number($("#session").text());
 var onBreak = false;
 
-function initListeners() {
+function initButtonListeners() {
 	$("#start").on("click", function() {
 		$("#continue, #reset, #stop").removeClass("hidden");
 		$("#start, #sessionLength, #breakLength").addClass("hidden");
+		$("#clock").text(timeString(sessionTime * 60));
 	});
 
 	$("#continue").on("click", function() {
@@ -22,15 +24,18 @@ function initListeners() {
 	$("#reset").on("click", function() {
 		$("#start, #sessionLength, #breakLength").removeClass("hidden");
 		$("#reset, #continue, #stop").addClass("hidden");
+		$("#clock").text("0:00");
 	});
+}
 
+function initSetTimerListeners() {
 	$("#breakLength .fa-minus").on("click", function() {
 		if(breakTime > 1) {
 			breakTime -= 1;
 			$("#break").text(breakTime);
 		}
 	});	
-	
+
 	$("#breakLength .fa-plus").on("click", function() {
 		breakTime += 1;
 		$("#break").text(breakTime);
