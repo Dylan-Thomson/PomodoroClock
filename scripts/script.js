@@ -12,13 +12,15 @@ var mute = false;
 var alerts = true;
 var timer;
 var audio = new Audio("sounds/buzz.mp3");
+// var audio = $("#audio");
 
+// TODO: Refactor code
 function initControlListeners() {
 	$("#controls").on("click", function() {
 		if(!running && !$("#clock-container").hasClass("paused")) {
 			$("#controls").removeClass("fa-play");
 			$("#controls").addClass("fa-pause");
-			startTimer(sessionTime * 60);
+			startTimer(sessionTime);
 			running = true;
 		}
 		else if($("#clock-container").hasClass("paused")) {
@@ -104,13 +106,16 @@ function initSetTimerListeners() {
 	});
 }
 
+// TODO: Fix issue where sound is not played before alert window pops up
+// TODO: Fix issue where alerts and sound do not work on my mobile device
+// TODO: Radial progress meter
 function startTimer() {
 	var time;
 	var alertMSG;
 	if(!onBreak) {
-		time = sessionTime * 60;
+		time = sessionTime;
 		alertMSG = "Time for a break!";
-		$("#clock").text(timeString(sessionTime * 60));
+		$("#clock").text(timeString(sessionTime));
 		$("h1").text("Work");
 		$("body").addClass("red-background");
 		$("body").removeClass("white-background");
@@ -118,9 +123,9 @@ function startTimer() {
 		$("#clock-container").removeClass("red-border");
 	}
 	else {
-		time = breakTime * 60;
+		time = breakTime;
 		alertMSG = "Back to work!";
-		$("#clock").text(timeString(breakTime * 60));
+		$("#clock").text(timeString(breakTime));
 		$("h1").text("Break");
 		$("body").addClass("white-background");
 		$("body").removeClass("red-background");
@@ -139,11 +144,31 @@ function startTimer() {
 						window.navigator.vibrate([500, 500, 500]);
 					}
 					if(!mute) {
-						audio.play().then(function() {
-							if(alerts) {
+						// if(alerts) {
+						// 	audio.get(0).onplay = function() {alert(alertMSG);};
+						// }
+						// else {
+						// 	audio.get(0).onplay = null;
+						// }
+						// audio.get(0).play();
+
+						// if(alerts) {
+						// 	alert(alertMSG);
+						// }
+						// audio.play().then(function() {
+						// 	if(alerts) {
+						// 		alert(alertMSG);
+						// 	}
+						// });
+						if(alerts) {
+							audio.play();
+							setTimeout(function() {
 								alert(alertMSG);
-							}
-						});
+							}, 200);
+						}
+						else {
+							audio.play();
+						}
 					}
 					else if(alerts) {
 						alert(alertMSG);
