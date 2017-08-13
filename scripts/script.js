@@ -1,28 +1,77 @@
 // Document Ready
 $(function() {
+	initControlListeners();
 	initSetTimerListeners();
-	initClockListener();
 });
 
 var breakTime = Number($("#break").text());
 var sessionTime = Number($("#session").text());
 var onBreak = false;
 var running = false;
+var mute = false;
+var alerts = true;
 var timer;
+var audio = new Audio("sounds/buzz.mp3");
 
-function initClockListener() {
-	$("#clock-container").on("click", function() {
+function initControlListeners() {
+	$("#controls").on("click", function() {
 		if(!running && !$("#clock-container").hasClass("paused")) {
-			startTimer(sessionTime);
+			$("#controls").removeClass("fa-play");
+			$("#controls").addClass("fa-pause");
+			startTimer(sessionTime * 60);
 			running = true;
 		}
 		else if($("#clock-container").hasClass("paused")) {
 			$("#clock-container").removeClass("paused");
+			$("#controls").removeClass("fa-play");
+			$("#controls").addClass("fa-pause");
 			running = true;
 		}
 		else {
 			$("#clock-container").addClass("paused");
+			$("#controls").removeClass("fa-pause");
+			$("#controls").addClass("fa-play");
 			running = false;
+		}
+	});
+	$("#volume").on("click", function() {
+		if(mute) {
+			$("#volume").addClass("fa-volume-up");
+			$("#volume").removeClass("fa-volume-off");
+		}
+		else {
+			$("#volume").addClass("fa-volume-off");
+			$("#volume").removeClass("fa-volume-up");
+		}
+		mute = !mute;
+	});
+	$("#alert").on("click", function() {
+		if(alerts) {
+			$("#alert").addClass("fa-ban");
+			$("#alert").removeClass("fa-exclamation-triangle");
+		}
+		else {
+			$("#alert").addClass("fa-exclamation-triangle");
+			$("#alert").removeClass("fa-ban");
+		}
+		alerts = !alerts;
+	});
+	$("#reset").on("click", function() {
+		if(running || $("#clock-container").hasClass("paused")) {
+			$("#clock").text("0:00");
+			window.clearInterval(timer);
+			$("h1").text("Pomodoro");
+			$("#controls").removeClass("fa-pause");
+			$("#controls").addClass("fa-play");
+			if(!onBreak) {
+				$("body").removeClass("red-background");
+				$("body").addClass("white-background");
+				$("#clock-container").removeClass("white-border");
+				$("#clock-container").addClass("red-border");
+			}
+			onBreak = false;
+			running = false;
+			$("#clock-container").removeClass("paused");
 		}
 	});
 }
@@ -59,9 +108,9 @@ function startTimer() {
 	var time;
 	var alertMSG;
 	if(!onBreak) {
-		time = sessionTime;
+		time = sessionTime * 60;
 		alertMSG = "Time for a break!";
-		$("#clock").text(timeString(sessionTime));
+		$("#clock").text(timeString(sessionTime * 60));
 		$("h1").text("Work");
 		$("body").addClass("red-background");
 		$("body").removeClass("white-background");
@@ -69,9 +118,9 @@ function startTimer() {
 		$("#clock-container").removeClass("red-border");
 	}
 	else {
-		time = breakTime;
+		time = breakTime * 60;
 		alertMSG = "Back to work!";
-		$("#clock").text(timeString(breakTime));
+		$("#clock").text(timeString(breakTime * 60));
 		$("h1").text("Break");
 		$("body").addClass("white-background");
 		$("body").removeClass("red-background");
@@ -86,11 +135,19 @@ function startTimer() {
 				onBreak = !onBreak;
 				window.clearInterval(timer);
 				window.setTimeout(function() {
-					alert(alertMSG);
+					if(!mute) {
+						audio.play().then(function() {
+							if(alerts) {
+								alert(alertMSG);
+							}
+						});
+					}
+					else if(alerts) {
+						alert(alertMSG);
+					}
 					return startTimer();
 				}, 1000);
 			}
-			
 		}
 	}, 1000);
 }
