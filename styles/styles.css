@@ -6,8 +6,19 @@ h1 {
 	text-transform: uppercase;
 }
 
-.paused {
+.container-fluid {
+	max-width: 400px;
+	/*padding-top: 10%;*/
+}
 
+.fa {
+	cursor: pointer;
+	margin: 10px;
+}
+
+.paused {
+	/*font-style: italic;*/
+	/*color: red;*/
 }
 
 .white-border {
@@ -31,16 +42,17 @@ h1 {
 }
 
 #sessionLength, #breakLength {
-	margin-bottom: 2em;
+	font-size: 1.5em;
+	margin-top: 1em;
 }
 
 #clock {
 	font-size: 4em;
-	margin: 25% auto;
+	margin: 35% auto;
 }
 
 #clock-container {
-	height: 15em;
-	width: 15em;
+	height: 20em;
+	width: 20em;
 	margin: 1em auto;
 }
