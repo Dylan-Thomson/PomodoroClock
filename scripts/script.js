@@ -40,6 +40,7 @@ function initControlListeners() {
 		if(mute) {
 			$("#volume").addClass("fa-volume-up");
 			$("#volume").removeClass("fa-volume-off");
+			audio.play();
 		}
 		else {
 			$("#volume").addClass("fa-volume-off");
