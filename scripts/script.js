@@ -140,26 +140,10 @@ function startTimer() {
 				onBreak = !onBreak;
 				window.clearInterval(timer);
 				window.setTimeout(function() {
-					if("vibrate" in navigator) {
-						window.navigator.vibrate([500, 500, 500]);
-					}
 					if(!mute) {
-						// if(alerts) {
-						// 	audio.get(0).onplay = function() {alert(alertMSG);};
-						// }
-						// else {
-						// 	audio.get(0).onplay = null;
-						// }
-						// audio.get(0).play();
-
-						// if(alerts) {
-						// 	alert(alertMSG);
-						// }
-						// audio.play().then(function() {
-						// 	if(alerts) {
-						// 		alert(alertMSG);
-						// 	}
-						// });
+						if("vibrate" in navigator) {
+							window.navigator.vibrate([500, 500, 500]);
+						}
 						if(alerts) {
 							audio.play();
 							setTimeout(function() {
