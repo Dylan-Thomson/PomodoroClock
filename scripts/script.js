@@ -135,6 +135,9 @@ function startTimer() {
 				onBreak = !onBreak;
 				window.clearInterval(timer);
 				window.setTimeout(function() {
+					if("vibrate" in navigator) {
+						window.navigator.vibrate([500, 500, 500]);
+					}
 					if(!mute) {
 						audio.play().then(function() {
 							if(alerts) {
