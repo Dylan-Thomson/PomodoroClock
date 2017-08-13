@@ -1,34 +1,29 @@
 // Document Ready
 $(function() {
 	initSetTimerListeners();
-	initButtonListeners();
+	initClockListener();
 });
 
 var breakTime = Number($("#break").text());
 var sessionTime = Number($("#session").text());
 var onBreak = false;
+var running = false;
 var timer;
 
-function initButtonListeners() {
-	$("#start").on("click", function() {
-		$("#continue, #reset, #stop").removeClass("hidden");
-		$("#start").addClass("hidden");
-		$("#clock").text(timeString(sessionTime));
-		startTimer(sessionTime);
-	});
-
-	$("#continue").on("click", function() {
-	});
-
-	$("#stop").on("click", function() {
-	});
-
-	$("#reset").on("click", function() {
-		$("#start").removeClass("hidden");
-		$("#reset, #continue, #stop").addClass("hidden");
-		$("#clock").text("0:00");
-		window.clearInterval(timer);
-		onBreak = false;
+function initClockListener() {
+	$("#clock-container").on("click", function() {
+		if(!running && !$("#clock-container").hasClass("paused")) {
+			startTimer(sessionTime);
+			running = true;
+		}
+		else if($("#clock-container").hasClass("paused")) {
+			$("#clock-container").removeClass("paused");
+			running = true;
+		}
+		else {
+			$("#clock-container").addClass("paused");
+			running = false;
+		}
 	});
 }
 
@@ -72,13 +67,18 @@ function startTimer() {
 		alertMSG = "Back to work!";
 	}
 	timer = window.setInterval(function() {
-		time -= 1;
-		$("#clock").text(timeString(time));
-		if(time <= 0) {
-			onBreak = !onBreak;
-			window.clearInterval(timer);
-			alert(alertMSG);
-			return startTimer();
+		if(!$("#clock-container").hasClass("paused")) {
+			time -= 1;
+			$("#clock").text(timeString(time));
+			if(time <= 0) {
+				onBreak = !onBreak;
+				window.clearInterval(timer);
+				window.setTimeout(function() {
+					alert(alertMSG);
+					return startTimer();
+				}, 1000);
+			}
+			
 		}
 	}, 1000);
 }
