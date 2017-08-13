@@ -61,10 +61,22 @@ function startTimer() {
 	if(!onBreak) {
 		time = sessionTime;
 		alertMSG = "Time for a break!";
+		$("#clock").text(timeString(sessionTime));
+		$("h1").text("Work");
+		$("body").addClass("red-background");
+		$("body").removeClass("white-background");
+		$("#clock-container").addClass("white-border");
+		$("#clock-container").removeClass("red-border");
 	}
 	else {
 		time = breakTime;
 		alertMSG = "Back to work!";
+		$("#clock").text(timeString(breakTime));
+		$("h1").text("Break");
+		$("body").addClass("white-background");
+		$("body").removeClass("red-background");
+		$("#clock-container").addClass("red-border");
+		$("#clock-container").removeClass("white-border");
 	}
 	timer = window.setInterval(function() {
 		if(!$("#clock-container").hasClass("paused")) {

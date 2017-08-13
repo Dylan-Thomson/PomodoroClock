@@ -1,19 +1,33 @@
 body {
-	background: #f8f9f9;
-	color: #353344;
 	text-align: center;
 }
 
 h1 {
-	color: #ff6347;
+	text-transform: uppercase;
+}
+
 .paused {
 
 }
+
+.white-border {
+	border: 1em solid #f8f9f9;
+	border-radius: 50%;
 }
 
+.red-border {
+	border: 1em solid #ff6347;
+	border-radius: 50%;
+}
 
-button {
-	color: #353344;
+.white-background {
+	background: #f8f9f9;
+	color: #ff6347;	
+}
+
+.red-background {
+	background: #ff6347;
+	color: #f8f9f9;
 }
 
 #sessionLength, #breakLength {
@@ -22,4 +36,11 @@ button {
 
 #clock {
 	font-size: 4em;
+	margin: 25% auto;
+}
+
+#clock-container {
+	height: 15em;
+	width: 15em;
+	margin: 1em auto;
 }
