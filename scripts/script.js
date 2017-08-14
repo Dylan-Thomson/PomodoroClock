@@ -46,7 +46,9 @@ function initControlListeners() {
 			$("#clock").text("0:00");
 			window.clearInterval(timer);
 			$("h1").text("Pomodoro");
-			$("#controls").toggleClass("fa-pause fa-play");
+			if(!$("#clock-container").hasClass("paused")) {
+				$("#controls").toggleClass("fa-pause fa-play");
+			}
 			if(!onBreak) {
 				$("body").toggleClass("white-background red-background");
 				$("#clock-container").toggleClass("white-border red-border");
