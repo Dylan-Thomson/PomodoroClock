@@ -18,44 +18,27 @@ var audio = new Audio("sounds/buzz.mp3");
 function initControlListeners() {
 	$("#controls").on("click", function() {
 		if(!running && !$("#clock-container").hasClass("paused")) {
-			$("#controls").removeClass("fa-play");
-			$("#controls").addClass("fa-pause");
+			$("#controls").toggleClass("fa-pause fa-play");
 			startTimer(sessionTime);
 			running = true;
 		}
 		else if($("#clock-container").hasClass("paused")) {
 			$("#clock-container").removeClass("paused");
-			$("#controls").removeClass("fa-play");
-			$("#controls").addClass("fa-pause");
+			$("#controls").toggleClass("fa-pause fa-play");
 			running = true;
 		}
 		else {
 			$("#clock-container").addClass("paused");
-			$("#controls").removeClass("fa-pause");
-			$("#controls").addClass("fa-play");
+			$("#controls").toggleClass("fa-pause fa-play");
 			running = false;
 		}
 	});
 	$("#volume").on("click", function() {
-		if(mute) {
-			$("#volume").addClass("fa-volume-up");
-			$("#volume").removeClass("fa-volume-off");
-		}
-		else {
-			$("#volume").addClass("fa-volume-off");
-			$("#volume").removeClass("fa-volume-up");
-		}
+		$("#volume").toggleClass("fa-volume-off fa-volume-up");
 		mute = !mute;
 	});
 	$("#alert").on("click", function() {
-		if(alerts) {
-			$("#alert").addClass("fa-ban");
-			$("#alert").removeClass("fa-exclamation-triangle");
-		}
-		else {
-			$("#alert").addClass("fa-exclamation-triangle");
-			$("#alert").removeClass("fa-ban");
-		}
+		$("#alert").toggleClass("fa-exclamation-triangle fa-ban");
 		alerts = !alerts;
 	});
 	$("#reset").on("click", function() {
@@ -63,13 +46,10 @@ function initControlListeners() {
 			$("#clock").text("0:00");
 			window.clearInterval(timer);
 			$("h1").text("Pomodoro");
-			$("#controls").removeClass("fa-pause");
-			$("#controls").addClass("fa-play");
+			$("#controls").toggleClass("fa-pause fa-play");
 			if(!onBreak) {
-				$("body").removeClass("red-background");
-				$("body").addClass("white-background");
-				$("#clock-container").removeClass("white-border");
-				$("#clock-container").addClass("red-border");
+				$("body").toggleClass("white-background red-background");
+				$("#clock-container").toggleClass("white-border red-border");
 			}
 			onBreak = false;
 			running = false;
@@ -106,8 +86,6 @@ function initSetTimerListeners() {
 	});
 }
 
-// TODO: Fix issue where sound is not played before alert window pops up
-// TODO: Fix issue where alerts and sound do not work on my mobile device
 // TODO: Radial progress meter
 function startTimer() {
 	var time;
@@ -117,21 +95,16 @@ function startTimer() {
 		alertMSG = "Time for a break!";
 		$("#clock").text(timeString(sessionTime));
 		$("h1").text("Work");
-		$("body").addClass("red-background");
-		$("body").removeClass("white-background");
-		$("#clock-container").addClass("white-border");
-		$("#clock-container").removeClass("red-border");
 	}
 	else {
 		time = breakTime;
 		alertMSG = "Back to work!";
 		$("#clock").text(timeString(breakTime));
 		$("h1").text("Break");
-		$("body").addClass("white-background");
-		$("body").removeClass("red-background");
-		$("#clock-container").addClass("red-border");
-		$("#clock-container").removeClass("white-border");
 	}
+
+	$("body").toggleClass("white-background red-background");
+	$("#clock-container").toggleClass("white-border red-border");
 	timer = window.setInterval(function() {
 		if(!$("#clock-container").hasClass("paused")) {
 			time -= 1;
