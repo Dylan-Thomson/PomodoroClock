@@ -46,13 +46,13 @@ h1 {
 .red-background {
 	/*background: #ff6347;*/
 	background: rgba(255,99,71,1);
-	background: -moz-radial-gradient(center, ellipse cover, rgba(255,99,71,1) 0%, rgba(255,99,71,1) 57%, rgba(187,36,9,1) 100%);
-	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,99,71,1)), color-stop(57%, rgba(255,99,71,1)), color-stop(100%, rgba(187,36,9,1)));
-	background: -webkit-radial-gradient(center, ellipse cover, rgba(255,99,71,1) 0%, rgba(255,99,71,1) 57%, rgba(187,36,9,1) 100%);
-	background: -o-radial-gradient(center, ellipse cover, rgba(255,99,71,1) 0%, rgba(255,99,71,1) 57%, rgba(187,36,9,1) 100%);
-	background: -ms-radial-gradient(center, ellipse cover, rgba(255,99,71,1) 0%, rgba(255,99,71,1) 57%, rgba(187,36,9,1) 100%);
-	background: radial-gradient(ellipse at center, rgba(255,99,71,1) 0%, rgba(255,99,71,1) 57%, rgba(187,36,9,1) 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff6347', endColorstr='#bb2409', GradientType=1 );
+	background: -moz-radial-gradient(center, ellipse cover, rgba(255,99,71,1) 0%, rgba(255,99,71,1) 57%, rgba(240,58,26,1) 100%);
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,99,71,1)), color-stop(57%, rgba(255,99,71,1)), color-stop(100%, rgba(240,58,26,1)));
+	background: -webkit-radial-gradient(center, ellipse cover, rgba(255,99,71,1) 0%, rgba(255,99,71,1) 57%, rgba(240,58,26,1) 100%);
+	background: -o-radial-gradient(center, ellipse cover, rgba(255,99,71,1) 0%, rgba(255,99,71,1) 57%, rgba(240,58,26,1) 100%);
+	background: -ms-radial-gradient(center, ellipse cover, rgba(255,99,71,1) 0%, rgba(255,99,71,1) 57%, rgba(240,58,26,1) 100%);
+	background: radial-gradient(ellipse at center, rgba(255,99,71,1) 0%, rgba(255,99,71,1) 57%, rgba(240,58,26,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff6347', endColorstr='#f03a1a', GradientType=1 );
 	color: #f8f9f9;
 }
 
