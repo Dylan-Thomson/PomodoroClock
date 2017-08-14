@@ -11,6 +11,13 @@ h1 {
 	/*padding-top: 10%;*/
 }
 
+.vertical-center {
+  min-height: 100%;
+  min-height: 100vh; 
+  display: flex;
+  align-items: center;
+}
+
 .fa {
 	cursor: pointer;
 	margin: 10px;
