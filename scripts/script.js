@@ -12,7 +12,6 @@ var mute = false;
 var alerts = true;
 var timer;
 var audio = new Audio("sounds/buzz.mp3");
-// var audio = $("#audio");
 
 // TODO: Refactor code
 function initControlListeners() {
