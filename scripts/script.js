@@ -1,20 +1,24 @@
 // Document Ready
 $(function() {
-	initControlListeners();
+	initPlayPauseListener();
+	initVolumeListener();
+	initAlertListener();
+	initResetListener();
 	initSetTimerListeners();
 });
 
+var time;
+var timer;
 var breakTime = Number($("#break").text());
 var sessionTime = Number($("#session").text());
 var onBreak = false;
 var running = false;
 var mute = false;
 var alerts = true;
-var timer;
 var audio = new Audio("sounds/buzz.mp3");
 
-// Play, Volume, Alerts, Reset
-function initControlListeners() {
+// Play button
+function initPlayPauseListener() {
 	$("#controls").on("click", function() {
 		if(!running && !$("#clock-container").hasClass("paused")) {
 			$("#controls").toggleClass("fa-pause fa-play");
@@ -32,14 +36,26 @@ function initControlListeners() {
 			running = false;
 		}
 	});
+}
+
+// Mute/unmute button
+function initVolumeListener() {
 	$("#volume").on("click", function() {
 		$("#volume").toggleClass("fa-volume-off fa-volume-up");
 		mute = !mute;
-	});
+	});	
+}
+
+// Alerts on/off button
+function initAlertListener() {
 	$("#alert").on("click", function() {
 		$("#alert").toggleClass("fa-exclamation-triangle fa-ban");
 		alerts = !alerts;
-	});
+	});	
+}
+
+// Reset button
+function initResetListener() {
 	$("#reset").on("click", function() {
 		if(running || $("#clock-container").hasClass("paused")) {
 			$("#clock").text("00:00");
@@ -50,15 +66,13 @@ function initControlListeners() {
 				$("#controls").toggleClass("fa-pause fa-play");
 			}
 			if(!onBreak) {
-				$("body").toggleClass("white-background red-background white-text red-text");
-				$(".radial-progress-cover, .radial-progress-background").toggleClass("red-stroke white-stroke");
-				$("text").toggleClass("red-fill white-fill");
+				toggleTheme()
 			}
 			onBreak = false;
 			running = false;
 			$("#clock-container").removeClass("paused");
 		}
-	});
+	});	
 }
 
 // Break Length and Work Length controls
@@ -92,7 +106,7 @@ function initSetTimerListeners() {
 
 // TODO: REFACTOR THIS
 function startTimer() {
-	var time;
+	// var time;
 	var alertMSG;
 	if(!onBreak) {
 		time = sessionTime * 60;
@@ -107,9 +121,7 @@ function startTimer() {
 		$("h1").text("Break");
 	}
 
-	$("body").toggleClass("white-background red-background white-text red-text");
-	$(".radial-progress-cover, .radial-progress-background").toggleClass("red-stroke white-stroke");
-	$("text").toggleClass("red-fill white-fill");
+	toggleTheme();
 
 	var radius = 9;
 	var circumference = 2 * radius * Math.PI;
@@ -151,6 +163,13 @@ function startTimer() {
 			}
 		}
 	}, 1000);
+}
+
+// Toggle classes on elements to change page colors
+function toggleTheme() {
+	$("body").toggleClass("white-background red-background white-text red-text");
+	$(".radial-progress-cover, .radial-progress-background").toggleClass("red-stroke white-stroke");
+	$("text").toggleClass("red-fill white-fill");
 }
 
 // Convert seconds to min:sec format
