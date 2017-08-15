@@ -21,6 +21,10 @@ h1 {
 	margin: 10px;
 }
 
+.paused {
+	opacity: .5;
+}
+
 /*THEME CLASSES*/
 .red-text {
 	color: #ff6347;
