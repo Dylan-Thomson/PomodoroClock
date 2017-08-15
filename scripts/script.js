@@ -43,7 +43,7 @@ function initControlListeners() {
 	});
 	$("#reset").on("click", function() {
 		if(running || $("#clock-container").hasClass("paused")) {
-			$("#clock").text("0:00");
+			$("#clock").text("00:00");
 			window.clearInterval(timer);
 			$("h1").text("Pomodoro");
 			if(!$("#clock-container").hasClass("paused")) {
@@ -104,17 +104,26 @@ function startTimer() {
 		$("#clock").text(timeString(breakTime));
 		$("h1").text("Break");
 	}
-
 	$("body").toggleClass("white-background red-background");
 	$("#clock-container").toggleClass("white-border red-border");
+
+	var radius = 9;
+	var circumference = 2 * radius * Math.PI;
+	$("circle").attr("stroke-dasharray", circumference + "em");
+	var currentCount = 1;
+	var maxCount = time;
 	timer = window.setInterval(function() {
 		if(!$("#clock-container").hasClass("paused")) {
+			var offset = -(circumference / maxCount) * currentCount + 'em';
+			$(".radial-progress-cover").attr("stroke-dashoffset", offset);
+			currentCount++;
 			time -= 1;
 			$("#clock").text(timeString(time));
 			if(time <= 0) {
 				onBreak = !onBreak;
 				window.clearInterval(timer);
 				window.setTimeout(function() {
+					$(".radial-progress-cover").attr("stroke-dashoffset", 0);
 					if(!mute) {
 						if("vibrate" in navigator) {
 							window.navigator.vibrate([500, 500, 500]);
@@ -145,3 +154,4 @@ function timeString(seconds) {
 	date.setSeconds(seconds);
 	return date.toISOString().substr(14,5);
 }
+

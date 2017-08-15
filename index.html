@@ -12,9 +12,20 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<h1>Pomodoro</h1>
-			<div id="clock-container" class="red-border">
+			<div class="svg radial-progress" id="clock-container">
+			    <svg height="20em" width="20em">
+			      <circle class="radial-progress-background" r="9em" cx="10em" cy="10em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0em"></circle>
+			      <circle class="radial-progress-cover" r="9em" cx="10em" cy="10em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0"></circle>
+			      <circle class="radial-progress-center" r="9em" cx="10em" cy="10em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0em"></circle>
+			      <text id="clock" x="9em" y="10em" transform="rotate(-270 560 125)">00:00</text>
+			    </svg>
+			  </div>
+<!-- 	    <svg height="20em" width="20em">
+	      <circle r="9em" cx="10em" cy="10em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0em"></circle>
+	    </svg> -->
+<!-- 			<div id="clock-container" class="red-border">
 				<div id="clock">0:00</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	<div class="row">
