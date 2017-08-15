@@ -43,6 +43,7 @@ function initControlListeners() {
 	$("#reset").on("click", function() {
 		if(running || $("#clock-container").hasClass("paused")) {
 			$("#clock").text("00:00");
+			$(".radial-progress-cover").attr("stroke-dashoffset", 0);
 			window.clearInterval(timer);
 			$("h1").text("Pomodoro");
 			if(!$("#clock-container").hasClass("paused")) {
