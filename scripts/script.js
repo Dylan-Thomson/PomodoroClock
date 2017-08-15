@@ -18,7 +18,7 @@ function initControlListeners() {
 	$("#controls").on("click", function() {
 		if(!running && !$("#clock-container").hasClass("paused")) {
 			$("#controls").toggleClass("fa-pause fa-play");
-			startTimer(sessionTime);
+			startTimer(sessionTime * 60);
 			running = true;
 		}
 		else if($("#clock-container").hasClass("paused")) {
@@ -95,15 +95,15 @@ function startTimer() {
 	var time;
 	var alertMSG;
 	if(!onBreak) {
-		time = sessionTime;
+		time = sessionTime * 60;
 		alertMSG = "Time for a break!";
-		$("#clock").text(timeString(sessionTime));
+		$("#clock").text(timeString(sessionTime * 60));
 		$("h1").text("Work");
 	}
 	else {
-		time = breakTime;
+		time = breakTime * 60;
 		alertMSG = "Back to work!";
-		$("#clock").text(timeString(breakTime));
+		$("#clock").text(timeString(breakTime * 60));
 		$("h1").text("Break");
 	}
 
