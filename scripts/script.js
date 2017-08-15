@@ -13,7 +13,7 @@ var alerts = true;
 var timer;
 var audio = new Audio("sounds/buzz.mp3");
 
-// TODO: Refactor code
+// Play, Volume, Alerts, Reset
 function initControlListeners() {
 	$("#controls").on("click", function() {
 		if(!running && !$("#clock-container").hasClass("paused")) {
@@ -50,8 +50,9 @@ function initControlListeners() {
 				$("#controls").toggleClass("fa-pause fa-play");
 			}
 			if(!onBreak) {
-				$("body").toggleClass("white-background red-background");
-				$("#clock-container").toggleClass("white-border red-border");
+				$("body").toggleClass("white-background red-background white-text red-text");
+				$(".radial-progress-cover, .radial-progress-background").toggleClass("red-stroke white-stroke");
+				$("text").toggleClass("red-fill white-fill");
 			}
 			onBreak = false;
 			running = false;
@@ -60,6 +61,7 @@ function initControlListeners() {
 	});
 }
 
+// Break Length and Work Length controls
 function initSetTimerListeners() {
 	$("#breakLength .fa-minus").on("click", function() {
 		if(breakTime > 1) {
@@ -88,7 +90,7 @@ function initSetTimerListeners() {
 	});
 }
 
-// TODO: Radial progress meter
+// TODO: REFACTOR THIS
 function startTimer() {
 	var time;
 	var alertMSG;
@@ -104,14 +106,17 @@ function startTimer() {
 		$("#clock").text(timeString(breakTime));
 		$("h1").text("Break");
 	}
-	$("body").toggleClass("white-background red-background");
-	$("#clock-container").toggleClass("white-border red-border");
+
+	$("body").toggleClass("white-background red-background white-text red-text");
+	$(".radial-progress-cover, .radial-progress-background").toggleClass("red-stroke white-stroke");
+	$("text").toggleClass("red-fill white-fill");
 
 	var radius = 9;
 	var circumference = 2 * radius * Math.PI;
 	$("circle").attr("stroke-dasharray", circumference + "em");
 	var currentCount = 1;
 	var maxCount = time;
+
 	timer = window.setInterval(function() {
 		if(!$("#clock-container").hasClass("paused")) {
 			var offset = -(circumference / maxCount) * currentCount + 'em';

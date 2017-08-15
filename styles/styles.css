@@ -1,15 +1,9 @@
 body {
 	text-align: center;
-	color: #ff6347;
 }
 
 h1 {
 	text-transform: uppercase;
-}
-
-.container-fluid {
-	max-width: 400px;
-	/*padding-top: 10%;*/
 }
 
 .vertical-center {
@@ -18,61 +12,57 @@ h1 {
   display: flex;
   align-items: center;
 }
+.container-fluid {
+	max-width: 400px;
+}
 
 .fa {
 	cursor: pointer;
 	margin: 10px;
 }
 
-.paused {
-	/*font-style: italic;*/
-	/*color: red;*/
+/*THEME CLASSES*/
+.red-text {
+	color: #ff6347;
 }
 
-/*.white-border {
-	border: 1em solid #f8f9f9;
-	border-radius: 50%;
-}
-
-.red-border {
-	border: 1em solid #ff6347;
-	border-radius: 50%;
-}*/
-
-/*.white-background {
-	background: #f8f9f9;
-	color: #ff6347;	
+.white-text {
+	color: #f8f9f9;
 }
 
 .red-background {
 	background: #ff6347;
-	color: #f8f9f9;
 }
-*/
+
+.white-background {
+	background: #f8f9f9;
+}
+
+.red-stroke {
+	stroke: #ff6347;
+}
+
+.white-stroke {
+	stroke: #f8f9f9
+}
+
+.red-fill {
+	fill: #ff6347;
+}
+
+.white-fill {
+	fill: #f8f9f9;
+}
+
 #sessionLength, #breakLength {
 	font-size: 1.5em;
-	/*margin-top: 1em;*/
 }
 
 #clock {
-/*	font-size: 4em;
-	margin: 35% auto;*/
 	font-size: 4em;
 }
 
-#clock-container {
-/*	height: 20em;
-	width: 20em;
-	margin: 1em auto;*/
-}
-
-
 /*SVG*/
-.svg.radial-progress {
-  position: relative;
-  display: inline-block;
-}
-
 svg {
   transform: rotate(270deg);
 }
@@ -80,21 +70,11 @@ svg {
 circle {
   stroke-width: 1em;
   fill: transparent;
-  /*transform: rotate(0.1deg);*/
 }
 
-.radial-progress-background {
-  stroke: #f8f9f9;
-}
-
-.radial-progress-cover {
-  stroke: #ff6347;
-  /*stroke-width: 2.01em;*/
-    /*border: 12px solid red;*/
-}
-
-.radial-progress-center {
-  /*fill: #CCC;*/
+.svg.radial-progress {
+  position: relative;
+  display: inline-block;
 }
 
 .radial-fill {

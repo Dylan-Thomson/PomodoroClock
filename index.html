@@ -7,37 +7,22 @@
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
-<body class="white-background vertical-center">
+<body class="white-background red-text vertical-center">
 <div class="container-fluid text-center">
 	<div class="row">
 		<div class="col-xs-12">
 			<h1>Pomodoro</h1>
 			<div class="svg radial-progress" id="clock-container">
 			    <svg height="20em" width="20em">
-			      <circle class="radial-progress-background" r="9em" cx="10em" cy="10em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0em"></circle>
-			      <circle class="radial-progress-cover" r="9em" cx="10em" cy="10em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0"></circle>
+			      <circle class="radial-progress-background white-stroke" r="9em" cx="10em" cy="10em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0em"></circle>
+			      <circle class="radial-progress-cover red-stroke" r="9em" cx="10em" cy="10em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0"></circle>
 			      <circle class="radial-progress-center" r="9em" cx="10em" cy="10em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0em"></circle>
-			      <text id="clock" x="9em" y="10em" transform="rotate(-270 560 125)">00:00</text>
+			      <text id="clock" class="red-fill" x="9em" y="10em" transform="rotate(-270 560 125)">00:00</text>
 			    </svg>
 			  </div>
-<!-- 	    <svg height="20em" width="20em">
-	      <circle r="9em" cx="10em" cy="10em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0em"></circle>
-	    </svg> -->
-<!-- 			<div id="clock-container" class="red-border">
-				<div id="clock">0:00</div>
-			</div> -->
 		</div>
 	</div>
 	<div class="row">
-		<!-- <div class="col-xs-4">
-			<i id="controls" class="fa fa-play fa-3x" title="Play/Pause" aria-hidden="true"></i>		
-		</div>
-		<div class="col-xs-4">
-			<i id="volume" class="fa fa-volume-up fa-3x" title="Mute/Unmute" aria-hidden="true"></i>
-		</div>
-		<div class="col-xs-4">
-			<i id="reset" class="fa fa-times fa-3x" title="Reset" aria-hidden="true"></i>
-		</div> -->
 		<div class="col-xs-3">
 			<i id="controls" class="fa fa-play fa-3x" title="Play/Pause" aria-hidden="true"></i>
 		</div>
@@ -70,7 +55,6 @@
 		</div>
 	</div>
 </div>
-
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/script.js"></script>
 </body>
