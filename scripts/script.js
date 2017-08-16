@@ -17,12 +17,13 @@ var mute = false;
 var alerts = true;
 var audio = new Audio("sounds/buzz.mp3");
 
+// TODO REFACTOR
 // Play button
 function initPlayPauseListener() {
 	$("#controls").on("click", function() {
 		if(!running && !$("#clock-container").hasClass("paused")) {
 			$("#controls").toggleClass("fa-pause fa-play");
-			startTimer(sessionTime * 60);
+			startTimer();
 			running = true;
 		}
 		else if($("#clock-container").hasClass("paused")) {
@@ -54,6 +55,8 @@ function initAlertListener() {
 	});	
 }
 
+
+// TODO: REFACTOR
 // Reset button
 function initResetListener() {
 	$("#reset").on("click", function() {
@@ -78,35 +81,42 @@ function initResetListener() {
 // Break Length and Work Length controls
 function initSetTimerListeners() {
 	$("#breakLength .fa-minus").on("click", function() {
-		if(breakTime > 1) {
-			breakTime -= 1;
-			$("#break").text(breakTime);
+		if(!running	&& !$("#clock-container").hasClass("paused")) {
+			if(breakTime > 1) {
+				breakTime -= 1;
+				$("#break").text(breakTime);
+			}
 		}
 	});	
 
 	$("#breakLength .fa-plus").on("click", function() {
-		if(breakTime < 60) {
-			breakTime += 1;
-			$("#break").text(breakTime);		
+		if(!running	&& !$("#clock-container").hasClass("paused")) {
+			if(breakTime < 60) {
+				breakTime += 1;
+				$("#break").text(breakTime);		
+			}
 		}
 	});	
 	$("#sessionLength .fa-minus").on("click", function() {
-		if(sessionTime > 1) {
-			sessionTime -= 1;
-			$("#session").text(sessionTime);
+		if(!running	&& !$("#clock-container").hasClass("paused")) {
+			if(sessionTime > 1) {
+				sessionTime -= 1;
+				$("#session").text(sessionTime);
+			}
 		}
 	});	
 	$("#sessionLength .fa-plus").on("click", function() {
-		if(sessionTime < 60) {
-			sessionTime += 1;
-			$("#session").text(sessionTime);
+		if(!running	&& !$("#clock-container").hasClass("paused")) {
+			if(sessionTime < 60) {
+				sessionTime += 1;
+				$("#session").text(sessionTime);
+			}	
 		}
 	});
 }
 
 // TODO: REFACTOR THIS
 function startTimer() {
-	// var time;
 	var alertMSG;
 	if(!onBreak) {
 		time = sessionTime * 60;
@@ -165,7 +175,7 @@ function startTimer() {
 	}, 1000);
 }
 
-// Toggle classes on elements to change page colors
+// Toggle page colors
 function toggleTheme() {
 	$("body").toggleClass("white-background red-background white-text red-text");
 	$(".radial-progress-cover, .radial-progress-background").toggleClass("red-stroke white-stroke");
