@@ -25,6 +25,11 @@ h1 {
 	opacity: .5;
 }
 
+.disabled {
+	opacity: .25;
+	cursor: default;
+}
+
 /*THEME CLASSES*/
 .red-text {
 	color: #ff6347;
