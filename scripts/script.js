@@ -24,7 +24,7 @@ function initPlayPauseListener() {
 	$("#controls").on("click", function() {
 		if(!running && !$("#clock-container").hasClass("paused")) {
 			$("#controls").toggleClass("fa-pause fa-play");
-			$(".fa-plus, .fa-minus").toggleClass("disabled");
+			$("#breakLength, #sessionLength").toggleClass("disabled");
 			startTimer();
 			running = true;
 		}
@@ -67,7 +67,7 @@ function initResetListener() {
 			$(".radial-progress-cover").attr("stroke-dashoffset", 0);
 			window.clearInterval(timer);
 			$("h1").text("Pomodoro");
-			$(".fa-plus, .fa-minus").toggleClass("disabled");
+			$("#breakLength, #sessionLength").toggleClass("disabled");
 			if(!$("#clock-container").hasClass("paused")) {
 				$("#controls").toggleClass("fa-pause fa-play");
 			}

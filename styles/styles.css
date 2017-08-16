@@ -26,7 +26,7 @@ h1 {
 }
 
 .disabled {
-	opacity: .25;
+	opacity: .5;
 	cursor: default;
 }
 
