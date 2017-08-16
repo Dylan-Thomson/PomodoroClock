@@ -17,8 +17,6 @@ var mute = false;
 var alerts = true;
 var audio = new Audio("sounds/buzz.mp3");
 
-
-// TODO REFACTOR
 // Play button
 function initPlayPauseListener() {
 	$("#controls").on("click", function() {
@@ -57,26 +55,24 @@ function initAlertListener() {
 	});	
 }
 
-
-// TODO: REFACTOR
 // Reset button
 function initResetListener() {
 	$("#reset").on("click", function() {
 		if(running || $("#clock-container").hasClass("paused")) {
-			$("#clock").text("00:00");
-			$(".radial-progress-cover").attr("stroke-dashoffset", 0);
 			window.clearInterval(timer);
-			$("h1").text("Pomodoro");
-			$("#breakLength, #sessionLength").toggleClass("disabled");
 			if(!$("#clock-container").hasClass("paused")) {
 				$("#controls").toggleClass("fa-pause fa-play");
 			}
 			if(!onBreak) {
 				toggleTheme()
 			}
+			$("h1").text("Pomodoro");
+			$("#clock").text("00:00");
+			$("#clock-container").removeClass("paused");
+			$(".radial-progress-cover").attr("stroke-dashoffset", 0);
+			$("#breakLength, #sessionLength").toggleClass("disabled");		
 			onBreak = false;
 			running = false;
-			$("#clock-container").removeClass("paused");
 		}
 	});	
 }
@@ -118,7 +114,7 @@ function initSetTimerListeners() {
 	});
 }
 
-// TODO: REFACTOR THIS
+// Start a new timer for either a break or work session
 function startTimer() {
 	var alertMSG;
 	if(!onBreak) {
@@ -134,21 +130,23 @@ function startTimer() {
 		$("h1").text("Break");
 	}
 
-	toggleTheme();
-
 	var radius = 9;
 	var circumference = 2 * radius * Math.PI;
-	$("circle").attr("stroke-dasharray", circumference + "em");
 	var currentCount = 1;
 	var maxCount = time;
+	$("circle").attr("stroke-dasharray", circumference + "em");
+
+	toggleTheme();
 
 	timer = window.setInterval(function() {
 		if(!$("#clock-container").hasClass("paused")) {
-			var offset = -(circumference / maxCount) * currentCount + 'em';
-			$(".radial-progress-cover").attr("stroke-dashoffset", offset);
-			currentCount++;
 			time -= 1;
 			$("#clock").text(timeString(time));
+			
+			var offset = -(circumference / maxCount) * currentCount + 'em';
+			currentCount++;
+			$(".radial-progress-cover").attr("stroke-dashoffset", offset);
+
 			if(time <= 0) {
 				onBreak = !onBreak;
 				window.clearInterval(timer);
